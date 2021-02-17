@@ -1,4 +1,4 @@
-package io.realworld.api.models
+package io.realworld.api.models.response
 
 
 import com.squareup.moshi.Json

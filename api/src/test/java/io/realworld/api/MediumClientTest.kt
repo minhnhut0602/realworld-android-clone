@@ -6,7 +6,7 @@ import org.junit.Test
 
 class MediumClientTest {
 
-    val mediumClient=MediumClient()
+    private val mediumClient=MediumClient()
 
     @Test
     fun `get articles`(){

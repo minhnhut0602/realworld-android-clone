@@ -1,10 +1,6 @@
 package io.realworld.api.services
 
-import io.realworld.api.models.entities.Article
-import io.realworld.api.models.entities.Comment
 import io.realworld.api.models.entities.CommentData
-import io.realworld.api.models.entities.User
-import io.realworld.api.models.requests.AuthRequest
 import io.realworld.api.models.requests.UpsertArticleRequest
 import io.realworld.api.models.requests.UserUpdateRequest
 import io.realworld.api.models.response.*
@@ -69,4 +65,20 @@ interface MediumAuthAPI {
     suspend fun getComments(
         @Path("slug") slug:String
     ) :Response<CommentsResponse>
+
+    @DELETE("articles/{slug}/comments/{id}")
+    suspend fun deleteComment(
+        @Path("slug") slug:String,
+        @Path("id") id:Int
+    )
+
+    @POST("articles/{slug}/favorite/")
+    suspend fun addFavorite(
+        @Path("slug") slug: String,
+    ) :Response<ArticleResponse>
+
+    @DELETE("articles/{slug}/favorite/")
+    suspend fun removeFavorite(
+        @Path("slug") slug: String,
+    ) :Response<ArticleResponse>
 }

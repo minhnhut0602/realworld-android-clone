@@ -66,13 +66,13 @@ class MediumClientTest {
                         """.trimIndent()
                         ,tagList = listOf("test", "dragon"))
             )
-            val articleData=mediumClient.mediumAuthAPI.createArticle(articleRequest)
 
-            val comments=mediumClient.mediumAuthAPI.getComments("cass-7ydkyl")
+            val comments=mediumClient.mediumAuthAPI.deleteComment("cass-7ydkyl",86170)
+
+            val favoriteArticle=mediumClient.mediumAuthAPI.removeFavorite("bla-bla-2-dz465e")
 
 
-            assertNotNull(comments.body()?.comments)
-            assertNull(articleData.body()?.article)
+            assertNotNull(favoriteArticle.body()?.article)
             assertNotNull(feedArticles.body()?.articles)
             assertNotNull(followUser.body()?.profile)
             assertNotNull(updatedUser.body()?.user)

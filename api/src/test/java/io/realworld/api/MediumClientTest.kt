@@ -1,9 +1,7 @@
 package io.realworld.api
 
 
-import io.realworld.api.models.entities.ArticleData
-import io.realworld.api.models.entities.AuthData
-import io.realworld.api.models.entities.UserUpdateData
+import io.realworld.api.models.entities.*
 import io.realworld.api.models.requests.AuthRequest
 import io.realworld.api.models.requests.UpsertArticleRequest
 import io.realworld.api.models.requests.UserUpdateRequest
@@ -61,16 +59,19 @@ class MediumClientTest {
 
             //Create and Update article
             val articleRequest=UpsertArticleRequest(
-                ArticleData(title = "Updated Article on Medium",
+                ArticleData(title = "Article on Conduit ",
                         description= "Test Article",
                         body = """ 
                             This is a testing article, Which means it is created while testing phase
                         """.trimIndent()
                         ,tagList = listOf("test", "dragon"))
             )
-            val articleData=mediumClient.mediumAuthAPI.deleteArticle("my-first-article-on-medium-epf9ib")
+            val articleData=mediumClient.mediumAuthAPI.createArticle(articleRequest)
+
+            val comments=mediumClient.mediumAuthAPI.getComments("cass-7ydkyl")
 
 
+            assertNotNull(comments.body()?.comments)
             assertNull(articleData.body()?.article)
             assertNotNull(feedArticles.body()?.articles)
             assertNotNull(followUser.body()?.profile)

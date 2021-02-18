@@ -1,14 +1,13 @@
 package io.realworld.api.services
 
 import io.realworld.api.models.entities.Article
+import io.realworld.api.models.entities.Comment
+import io.realworld.api.models.entities.CommentData
 import io.realworld.api.models.entities.User
 import io.realworld.api.models.requests.AuthRequest
 import io.realworld.api.models.requests.UpsertArticleRequest
 import io.realworld.api.models.requests.UserUpdateRequest
-import io.realworld.api.models.response.ArticleResponse
-import io.realworld.api.models.response.ArticlesResponse
-import io.realworld.api.models.response.ProfileResponse
-import io.realworld.api.models.response.UserResponse
+import io.realworld.api.models.response.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -58,4 +57,16 @@ interface MediumAuthAPI {
     suspend fun deleteArticle(
         @Path("slug") slug:String,
     ) :Response<ArticleResponse>
+
+    @POST("articles/{slug}/comments")
+    suspend fun commentOnArticle(
+        @Path("slug") slug: String,
+        @Body comment : CommentData
+    ) :Response<CommentResponse>
+
+
+    @GET("articles/{slug}/comments")
+    suspend fun getComments(
+        @Path("slug") slug:String
+    ) :Response<CommentsResponse>
 }

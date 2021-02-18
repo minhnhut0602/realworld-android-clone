@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 class MediumClientTest {
 
-    private val mediumClient=MediumClient()
+    private val mediumClient=MediumClient
 
     @Test
     fun `get articles`(){
@@ -26,15 +26,20 @@ class MediumClientTest {
     fun `register and login`(){
 
         val authRequest=AuthRequest(
-            AuthData(email = "testemail${Random.nextInt(999, 9999)}@test.com",
-                password = "pass${Random.nextInt(9999, 999999)}",
-                username = "rand_user_${Random.nextInt(99, 999)}")
+            AuthData("doesitmatter@gmail.com",
+            "asdf1234")
         )
         runBlocking{
 
-            val user=mediumClient.mediumAPI.registerUser(authRequest)
+            val user=mediumClient.mediumAPI.loginUser(authRequest)
 
-            assertEquals(user.body()?.user?.username,authRequest.user.username)
+
+            val token =user.body()?.user?.token
+            mediumClient.token=token
+            val getUser=mediumClient.mediumAuthAPI.getUser()
+            assertNotNull(getUser.body()?.user?.username)
         }
     }
+
+
 }

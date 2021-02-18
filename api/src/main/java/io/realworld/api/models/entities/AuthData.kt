@@ -11,5 +11,5 @@ data class AuthData(
     @Json(name ="password")
     val password:String,
     @Json(name ="username")
-    val username:String?
+    val username:String?=null
 )

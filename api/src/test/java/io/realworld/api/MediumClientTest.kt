@@ -1,13 +1,13 @@
 package io.realworld.api
 
 import io.realworld.api.models.entities.AuthData
+import io.realworld.api.models.entities.UserUpdateData
 import io.realworld.api.models.requests.AuthRequest
+import io.realworld.api.models.requests.UserUpdateRequest
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
-import java.util.*
-import kotlin.random.Random
 
 class MediumClientTest {
 
@@ -31,13 +31,18 @@ class MediumClientTest {
         )
         runBlocking{
 
-            val user=mediumClient.mediumAPI.loginUser(authRequest)
+            val userAuth=mediumClient.mediumAPI.loginUser(authRequest)
 
 
-            val token =user.body()?.user?.token
+            val token =userAuth.body()?.user?.token
             mediumClient.token=token
-            val getUser=mediumClient.mediumAuthAPI.getUser()
-            assertNotNull(getUser.body()?.user?.username)
+            val updateRequest =UserUpdateRequest(
+                UserUpdateData(null,"doesitmatter@gmail.com",null,"Karan1628","asdf1234")
+            )
+            val updatedUser=mediumClient.mediumAuthAPI.updateUser(updateRequest)
+
+            assertNotNull(updatedUser.body()?.user)
+            assertEquals("Karan1628",updatedUser.body()?.user?.username)
         }
     }
 

@@ -1,4 +1,4 @@
-package io.realworld.api
+ package io.realworld.api
 
 
 import io.realworld.api.models.entities.*
@@ -30,7 +30,7 @@ class MediumClientTest {
 
         val authRequest=AuthRequest(
             AuthData("doesitmatter@gmail.com",
-            "asdf1234")
+            "asdf1234$#@!")
         )
         runBlocking{
 

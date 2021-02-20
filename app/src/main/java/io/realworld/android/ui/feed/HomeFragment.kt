@@ -1,4 +1,4 @@
-package io.realworld.android.ui.home
+package io.realworld.android.ui.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.tabs.TabLayoutMediator
 import io.realworld.android.R
-import io.realworld.android.databinding.FragmentHomeBinding
+import io.realworld.android.databinding.FragmentFeedBinding
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentFeedBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,14 +29,19 @@ class HomeFragment : Fragment() {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentFeedBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab, position ->
+            binding.viewPager.setCurrentItem(R.layout.fragment_article)
+
+        }.attach()
     }
 
     override fun onDestroyView() {

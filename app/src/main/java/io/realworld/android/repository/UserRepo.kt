@@ -63,4 +63,7 @@ class UserRepo {
         return response.body()?.profile
     }
 
+     fun logout(){
+        MediumClient.token=null
+    }
 }

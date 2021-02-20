@@ -13,8 +13,8 @@ class ArticleRepo {
     val authApi=MediumClient.mediumAuthAPI
 
 
-    suspend fun getArticles() : List<Article>? {
-        val response= api.getArticles()
+    suspend fun getArticles(author:String,tag:String,favorite:String) : List<Article>? {
+        val response= api.getArticles(author,tag,favorite)
         return response.body()?.articles
     }
 

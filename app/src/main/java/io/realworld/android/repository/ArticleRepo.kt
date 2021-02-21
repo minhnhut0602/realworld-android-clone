@@ -7,13 +7,13 @@ import io.realworld.api.models.entities.Comment
 import io.realworld.api.models.entities.CommentData
 import io.realworld.api.models.requests.UpsertArticleRequest
 
-class ArticleRepo {
+object ArticleRepo {
 
-    val api=MediumClient.mediumAPI
-    val authApi=MediumClient.mediumAuthAPI
+    private  val api=MediumClient.mediumAPI
+    private val authApi=MediumClient.mediumAuthAPI
 
 
-    suspend fun getArticles(author:String,tag:String,favorite:String) : List<Article>? {
+    suspend fun getArticles(author:String?=null,tag:String?=null,favorite:String?=null) : List<Article>? {
         val response= api.getArticles(author,tag,favorite)
         return response.body()?.articles
     }

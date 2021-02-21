@@ -5,21 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.realworld.android.databinding.FragmentArticleBinding
 
 class GlobalFeedFragment : Fragment() {
 
     private var _binding :FragmentArticleBinding? = null
-
+    private lateinit var feedAdapter: FeedAdapter
+    private lateinit var viewModel:FeedViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        _binding= FragmentArticleBinding.inflate(layoutInflater,container,false)
+
+        feedAdapter= FeedAdapter(requireContext())
+        _binding?.recyclerView?.layoutManager= LinearLayoutManager(context)
+        _binding?.recyclerView?.adapter=feedAdapter
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getGlobalFeed()
+        viewModel.feedData.observe({lifecycle}){
+            feedAdapter.updateArticle(it)
+        }
     }
 }

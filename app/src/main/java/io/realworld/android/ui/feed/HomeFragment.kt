@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import io.realworld.android.R
@@ -14,7 +12,7 @@ import io.realworld.android.databinding.FragmentFeedBinding
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeViewModel: FeedViewModel
     private var _binding: FragmentFeedBinding? = null
 
     // This property is only valid between onCreateView and
@@ -27,7 +25,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(FeedViewModel::class.java)
 
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
         val root: View = binding.root

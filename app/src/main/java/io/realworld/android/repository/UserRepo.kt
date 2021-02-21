@@ -8,7 +8,7 @@ import io.realworld.api.models.entities.UserUpdateData
 import io.realworld.api.models.requests.AuthRequest
 import io.realworld.api.models.requests.UserUpdateRequest
 
-class UserRepo {
+object UserRepo {
 
 
     val api=MediumClient.mediumAPI

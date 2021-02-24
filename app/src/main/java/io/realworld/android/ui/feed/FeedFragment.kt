@@ -40,7 +40,7 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController=binding.let{ Navigation.findNavController(it.root.findViewById(R.id.navigation_feed))}
+        navController=binding.let{ Navigation.findNavController(it.root.findViewById(R.id.feedFragmentNavHost))}
         binding.feedTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){

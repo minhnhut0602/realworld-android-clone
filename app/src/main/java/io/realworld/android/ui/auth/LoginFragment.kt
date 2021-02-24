@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import io.realworld.android.databinding.FragmentAuthBinding
+import io.realworld.android.AuthViewModel
 import io.realworld.android.databinding.FragmentLoginSignupBinding
 
 class LoginFragment: Fragment() {

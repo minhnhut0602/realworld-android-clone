@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import io.realworld.android.R
 import io.realworld.api.models.entities.Article
 
-class FeedAdapter(private val context: Context):RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+class FeedAdapter(private val context: Context,val onArticleClicked: (slug:String)->Unit):RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
     private val allArticle =ArrayList<Article>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,6 +22,7 @@ class FeedAdapter(private val context: Context):RecyclerView.Adapter<FeedAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val article=allArticle[position]
         holder.author.text=article.author.username
         holder.dateTv.text=article.updatedAt
@@ -30,6 +31,7 @@ class FeedAdapter(private val context: Context):RecyclerView.Adapter<FeedAdapter
         article.author.image.let{
             Glide.with(context).load(it).into(holder.profileImage)
         }
+        holder.itemView.setOnClickListener { onArticleClicked(article.slug) }
     }
 
     override fun getItemCount(): Int = allArticle.size

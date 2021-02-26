@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import io.realworld.android.databinding.ActivityMainBinding
 import io.realworld.api.models.entities.User
@@ -73,15 +74,21 @@ class MainActivity : AppCompatActivity() {
             navController.navigateUp()
         }
 
+        binding.appBarMain.fab.setOnClickListener {
+            findNavController(R.id.nav_host_fragment_content_main).
+                    navigate(R.id.nav_create_article)
+        }
     }
 
     private fun updateMenu(user: User?) {
         when(user){
             is User ->{
+                binding.appBarMain.fab.isVisible=true
                 binding.navView.menu.clear()
                 binding.navView.inflateMenu(R.menu.menu_main_user)
             }
             else ->{
+                binding.appBarMain.fab.isVisible=false
                 binding.navView.menu.clear()
                 binding.navView.inflateMenu(R.menu.menu_main_guest)
             }

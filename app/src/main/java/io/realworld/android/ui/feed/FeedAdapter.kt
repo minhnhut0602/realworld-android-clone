@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.realworld.android.R
+import io.realworld.android.extensions.loadImage
+import io.realworld.android.extensions.timeStamp
 import io.realworld.api.models.entities.Article
 
 class FeedAdapter(private val context: Context,val onArticleClicked: (slug:String)->Unit):RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
@@ -25,11 +27,11 @@ class FeedAdapter(private val context: Context,val onArticleClicked: (slug:Strin
 
         val article=allArticle[position]
         holder.author.text=article.author.username
-        holder.dateTv.text=article.updatedAt
+        holder.dateTv.timeStamp=article.updatedAt
         holder.title.text=article.title
         holder.bodySnippet.text=article.body
         article.author.image.let{
-            Glide.with(context).load(it).into(holder.profileImage)
+            holder.profileImage.loadImage(it)
         }
         holder.itemView.setOnClickListener { onArticleClicked(article.slug) }
     }

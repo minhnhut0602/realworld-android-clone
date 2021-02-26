@@ -27,7 +27,7 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
+        TODO("update user setting profile")
         return root
     }
 

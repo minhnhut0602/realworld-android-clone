@@ -10,10 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.realworld.android.databinding.FragmentArticleBinding
+import io.realworld.android.databinding.FragmentFeedBinding
 
 class MyFeedFragment: Fragment() {
 
-    private var _binding : FragmentArticleBinding? = null
+    private var _binding : FragmentFeedBinding? = null
     private lateinit var feedAdapter: FeedAdapter
     private val viewModel:FeedViewModel by activityViewModels()
     override fun onCreateView(
@@ -21,7 +22,7 @@ class MyFeedFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding= FragmentArticleBinding.inflate(layoutInflater,container,false)
+        _binding= FragmentFeedBinding.inflate(layoutInflater,container,false)
         feedAdapter= FeedAdapter(requireContext())
         _binding?.feedRecyclerView?.layoutManager=LinearLayoutManager(context)
         _binding?.feedRecyclerView?.adapter=feedAdapter

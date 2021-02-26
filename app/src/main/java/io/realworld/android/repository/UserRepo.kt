@@ -28,7 +28,8 @@ object UserRepo {
         return response.body()?.user
     }
 
-    suspend fun getCurrentUser() :User?{
+    suspend fun getCurrentUser(token:String) :User?{
+        MediumClient.token=token
         val response=authApi.getUser()
         return response.body()?.user
     }

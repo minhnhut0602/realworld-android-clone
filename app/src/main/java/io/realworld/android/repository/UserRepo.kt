@@ -34,13 +34,19 @@ object UserRepo {
         return response.body()?.user
     }
 
-    suspend fun updateUser(user:UserUpdateData) :User? {
+    suspend fun updateUser(
+        username: String?,
+        email: String?,
+        bio:String?,
+        password: String?,
+        image:String?
+    ) :User? {
         val response=authApi.updateUser(UserUpdateRequest(UserUpdateData(
-            bio=user.bio,
-            email=user.email,
-            image=user.image,
-            username = user.username,
-            password = user.password
+            bio=bio,
+            email=email,
+            image=image,
+            username = username,
+            password = password
         )))
         return response.body()?.user
     }

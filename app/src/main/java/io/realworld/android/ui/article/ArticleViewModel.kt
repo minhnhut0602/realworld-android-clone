@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.realworld.android.repository.ArticleRepo
-import io.realworld.api.MediumClient
 import io.realworld.api.models.entities.Article
-import io.realworld.api.models.entities.ArticleData
 import kotlinx.coroutines.launch
 
 class ArticleViewModel:ViewModel() {
@@ -23,7 +21,17 @@ class ArticleViewModel:ViewModel() {
         }
     }
 
-    fun createArticle(article: ArticleData) =viewModelScope.launch {
-        ArticleRepo.createArticle(article)
+    fun createArticle(
+        title:String?,
+        description:String?,
+        body:String?,
+        tagList:List<String>?=null
+    ) =viewModelScope.launch {
+        val article =ArticleRepo.createArticle(
+                title=title,
+                description = description,
+                body=body,
+                tagList = tagList
+        )
     }
 }

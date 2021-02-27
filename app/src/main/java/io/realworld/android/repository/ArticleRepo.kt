@@ -33,8 +33,20 @@ object ArticleRepo {
         return response.body()?.tags
     }
 
-    suspend fun createArticle(article:ArticleData) :Article? {
-        val response =authApi.createArticle(UpsertArticleRequest(article))
+    suspend fun createArticle(
+        title:String?,
+        description:String?,
+        body:String?,
+        tagList:List<String>?=null
+    ) :Article? {
+        val response =authApi.createArticle(UpsertArticleRequest(
+            ArticleData(
+                title=title,
+                description = description,
+                body = body,
+                tagList = tagList
+            )
+        ))
 
         return response.body()?.article
     }

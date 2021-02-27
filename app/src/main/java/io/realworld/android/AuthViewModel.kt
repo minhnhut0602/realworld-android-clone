@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.realworld.android.repository.UserRepo
 import io.realworld.api.models.entities.User
+import io.realworld.api.models.entities.UserUpdateData
 import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel() {
@@ -27,6 +28,23 @@ class AuthViewModel : ViewModel() {
 
     fun registerUser(username:String,email:String,password:String) =viewModelScope.launch {
         UserRepo.registerUser(username,email,password).let{
+            _user.postValue(it)
+        }
+    }
+
+    fun updateUser(
+        username: String?,
+        email: String?,
+        bio:String?,
+        password: String?,
+        image:String?) = viewModelScope.launch {
+        UserRepo.updateUser(
+                username=username,
+                email = email,
+                bio = bio,
+                image = image,
+                password = password
+        )?.let {
             _user.postValue(it)
         }
     }

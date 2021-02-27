@@ -1,0 +1,50 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/commentTv"
+        android:lines="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="4dp">
+        <ImageView
+            android:id="@+id/userProfileImage"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            tools:background="@color/conduit_grey"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/userTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:text="username"/>
+            <TextView
+                android:id="@+id/dateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                tools:text="December 15, 2020"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/deleteIv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_delete"/>
+    </RelativeLayout>
+
+</LinearLayout>

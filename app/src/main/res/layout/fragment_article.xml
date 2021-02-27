@@ -46,8 +46,45 @@
         android:id="@+id/bodyTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="2"
+        android:maxLines="20"
         android:padding="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:text="ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error"/>
+        tools:text="ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error
+ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error
+"/>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/article_item" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/commentEditText"
+            android:hint="Write a Comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/submitComment"
+            android:text="Post Comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"/>
+    </LinearLayout>
 </LinearLayout>

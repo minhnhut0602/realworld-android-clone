@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.realworld.android.R
 import io.realworld.android.databinding.FragmentArticleBinding
 import io.realworld.android.extensions.loadImage
@@ -16,6 +17,7 @@ class ArticleFragment: Fragment() {
     private lateinit var articleViewModel:ArticleViewModel
     private var _binding:FragmentArticleBinding? =null
     private var articleId:String? = null
+    private lateinit var commentAdapter: CommentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +29,13 @@ class ArticleFragment: Fragment() {
         arguments?.let{
             articleId=it.getString(resources.getString(R.string.arg_article_id))
         }
-        articleId?.let{ articleViewModel.getArticle(it)}
+        articleId?.let{
+            articleViewModel.getArticle(it)
+        articleViewModel.getComment(it)}
+
+        commentAdapter=CommentAdapter()
+        _binding?.commentRecyclerView?.layoutManager= LinearLayoutManager(context)
+        _binding?.commentRecyclerView?.adapter=commentAdapter
 
         return _binding?.root
     }
@@ -43,6 +51,10 @@ class ArticleFragment: Fragment() {
                 dateTextView.timeStamp = it.createdAt
                 avatarImageView.loadImage(it.author.image, true)
             }
+        }
+
+        articleViewModel.comment.observe({lifecycle}) {
+            commentAdapter.updateComment(it)
         }
     }
 

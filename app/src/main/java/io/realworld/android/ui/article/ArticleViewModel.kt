@@ -54,5 +54,6 @@ class ArticleViewModel:ViewModel() {
         ArticleRepo.deleteComment(slug,id).let{
             getComment(slug)
         }
+
     }
 }

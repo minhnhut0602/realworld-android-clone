@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +35,7 @@ class ArticleFragment: Fragment() {
         articleViewModel.getComment(it)
         }
 
-        commentAdapter=CommentAdapter({delteClickedComment(id)})
+        commentAdapter=CommentAdapter(requireContext()) { deleteClickedComment(it) }
         _binding?.commentRecyclerView?.layoutManager= LinearLayoutManager(context)
         _binding?.commentRecyclerView?.adapter=commentAdapter
 
@@ -72,9 +73,10 @@ class ArticleFragment: Fragment() {
         }
     }
 
-    fun delteClickedComment(id:Int){
+    fun deleteClickedComment(id:Int){
         articleId?.let{
             articleViewModel.deleteComment(it,id)
+//            Toast.makeText(requireContext(),"$it and $id",Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -69,8 +69,9 @@ object ArticleRepo {
 
         return response.body()?.comments
     }
-    suspend fun createComment(slug:String, comment: CommentData) : Comment? {
-        val response =authApi.commentOnArticle(slug,comment)
+    suspend fun createComment(slug:String, comment: String) : Comment? {
+        val response =authApi.commentOnArticle(slug,
+        CommentData(comment))
 
         return response.body()?.comments
     }

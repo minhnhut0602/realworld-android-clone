@@ -43,4 +43,16 @@ class ArticleViewModel:ViewModel() {
             _comment.postValue(it)
         }
     }
+
+    fun addComment(slug:String,textComment:String) =viewModelScope.launch {
+        ArticleRepo.createComment(slug,textComment).let{
+            it?.let { getComment(slug)}
+        }
+    }
+
+    fun deleteComment(slug:String,id:Int) =viewModelScope.launch {
+        ArticleRepo.deleteComment(slug,id).let{
+            getComment(slug)
+        }
+    }
 }

@@ -31,9 +31,10 @@ class ArticleFragment: Fragment() {
         }
         articleId?.let{
             articleViewModel.getArticle(it)
-        articleViewModel.getComment(it)}
+        articleViewModel.getComment(it)
+        }
 
-        commentAdapter=CommentAdapter()
+        commentAdapter=CommentAdapter({delteClickedComment(id)})
         _binding?.commentRecyclerView?.layoutManager= LinearLayoutManager(context)
         _binding?.commentRecyclerView?.adapter=commentAdapter
 
@@ -55,6 +56,25 @@ class ArticleFragment: Fragment() {
 
         articleViewModel.comment.observe({lifecycle}) {
             commentAdapter.updateComment(it)
+        }
+
+        _binding?.apply {
+            submitComment.setOnClickListener{
+               articleId?.let { slug->
+                   commentEditText.text.toString().takeIf { it.isNotBlank() }?.let { it1 ->
+                       articleViewModel.addComment(slug,
+                           it1
+                       )
+                   }
+               }
+                commentEditText.setText("")
+            }
+        }
+    }
+
+    fun delteClickedComment(id:Int){
+        articleId?.let{
+            articleViewModel.deleteComment(it,id)
         }
     }
 

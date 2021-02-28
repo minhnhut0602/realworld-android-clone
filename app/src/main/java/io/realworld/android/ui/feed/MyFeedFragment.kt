@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.realworld.android.AuthViewModel
 import io.realworld.android.R
 import io.realworld.android.databinding.FragmentArticleBinding
 import io.realworld.android.databinding.FragmentFeedBinding
@@ -20,6 +22,8 @@ class MyFeedFragment: Fragment() {
     private var _binding : FragmentFeedBinding? = null
     private lateinit var feedAdapter: FeedAdapter
     private val viewModel:FeedViewModel by activityViewModels()
+    val authViewModel: AuthViewModel by activityViewModels()
+    private var username:String?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,13 +43,20 @@ class MyFeedFragment: Fragment() {
         viewModel.feedData.observe({lifecycle}){
             feedAdapter.updateArticle(it)
         }
+
+        authViewModel.user.observe({lifecycle}) { user->
+            user?.let{
+                username=it.username
+            }
+        }
     }
 
     private fun openArticle(articleId:String){
         findNavController().navigate(
             R.id.action_myFeed_openArticle,
             bundleOf(
-                resources.getString(R.string.arg_article_id) to articleId
+                resources.getString(R.string.arg_article_id) to articleId,
+                "username" to username
             )
         )
     }

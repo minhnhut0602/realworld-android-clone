@@ -19,7 +19,7 @@ class ArticleFragment: Fragment() {
     private var _binding:FragmentArticleBinding? =null
     private var articleId:String? = null
     private lateinit var commentAdapter: CommentAdapter
-
+    private var userName:String?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,13 +29,16 @@ class ArticleFragment: Fragment() {
         articleViewModel=ViewModelProvider(this).get(ArticleViewModel::class.java)
         arguments?.let{
             articleId=it.getString(resources.getString(R.string.arg_article_id))
+            userName=it.getString("username")
         }
         articleId?.let{
             articleViewModel.getArticle(it)
         articleViewModel.getComment(it)
         }
 
-        commentAdapter=CommentAdapter(requireContext()) { deleteClickedComment(it) }
+        commentAdapter=CommentAdapter(userName!!) { deleteClickedComment(it) }
+
+
         _binding?.commentRecyclerView?.layoutManager= LinearLayoutManager(context)
         _binding?.commentRecyclerView?.adapter=commentAdapter
 
@@ -76,7 +79,6 @@ class ArticleFragment: Fragment() {
     fun deleteClickedComment(id:Int){
         articleId?.let{
             articleViewModel.deleteComment(it,id)
-//            Toast.makeText(requireContext(),"$it and $id",Toast.LENGTH_SHORT).show()
         }
     }
 

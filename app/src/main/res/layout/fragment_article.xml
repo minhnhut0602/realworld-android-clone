@@ -58,24 +58,28 @@ ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error 
         android:layout_height="2dp"
         android:background="#c0c0c0"/>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/commentRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/article_item" />
-    </ScrollView>
+            tools:listitem="@layout/article_item"
+            android:layout_above="@id/commentBox"/>
+
 
     <LinearLayout
+        android:id="@+id/commentBox"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
         <EditText
             android:id="@+id/commentEditText"
             android:hint="Write a Comment"
@@ -88,4 +92,5 @@ ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error 
             android:layout_height="wrap_content"
             android:layout_gravity="right"/>
     </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

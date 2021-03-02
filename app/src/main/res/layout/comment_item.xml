@@ -4,21 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="3dp">
     <TextView
         android:id="@+id/commentTv"
-        android:lines="2"
+        tools:text="Comment"
+        android:lines="1"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="4dp">
+        android:gravity="center_vertical">
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/userProfileImage"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             tools:background="@color/conduit_grey"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,7 +31,7 @@
                 android:id="@+id/userTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 tools:text="username"/>
             <TextView
                 android:id="@+id/dateTv"
@@ -40,9 +42,10 @@
         </LinearLayout>
         <ImageView
             android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
             android:id="@+id/deleteIv"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_delete"/>
     </RelativeLayout>

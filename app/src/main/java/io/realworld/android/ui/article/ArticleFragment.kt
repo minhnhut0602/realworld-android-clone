@@ -36,7 +36,7 @@ class ArticleFragment: Fragment() {
         articleViewModel.getComment(it)
         }
 
-        commentAdapter=CommentAdapter(userName!!) { deleteClickedComment(it) }
+        commentAdapter=CommentAdapter(userName) { deleteClickedComment(it) }
 
 
         _binding?.commentRecyclerView?.layoutManager= LinearLayoutManager(context)

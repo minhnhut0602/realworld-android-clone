@@ -12,7 +12,7 @@ import io.realworld.android.extensions.loadImage
 import io.realworld.android.extensions.timeStamp
 import io.realworld.api.models.entities.Comment
 
-class CommentAdapter(val username:String, val onCommentDeleteClicked: (id:Int) -> Unit):RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
+class CommentAdapter(val username:String?, val onCommentDeleteClicked: (id:Int) -> Unit):RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
 
     private val allComment =ArrayList<Comment>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +29,7 @@ class CommentAdapter(val username:String, val onCommentDeleteClicked: (id:Int) -
             profileImage.loadImage(comment.author.image,true)
             userTv.text=comment.author.username
 
-                if(comment.author.username==username) {
+                if(comment.author.username==username && username!=null) {
                     deleteIv.isVisible=true
                     deleteIv.setOnClickListener {
                         onCommentDeleteClicked(comment.id)

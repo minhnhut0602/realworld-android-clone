@@ -45,6 +45,11 @@ class ArticleViewModel:ViewModel() {
         ArticleRepo.deleteArticle(slug)
     }
 
+    fun updateArticle(
+
+    ) =viewModelScope.launch {
+
+    }
     fun getComment(slug:String) =viewModelScope.launch {
         ArticleRepo.getComments(slug).let{
             _comment.postValue(it)

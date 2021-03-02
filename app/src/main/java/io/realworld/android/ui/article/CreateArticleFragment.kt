@@ -24,6 +24,7 @@ class CreateArticleFragment: Fragment() {
         articleViewModel= ViewModelProvider(this).get(ArticleViewModel::class.java)
 
 
+
         return _binding?.root
     }
 
@@ -31,6 +32,7 @@ class CreateArticleFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _binding?.apply {
+            articleTitleTv.requestFocus()
             submitButton.setOnClickListener{
                 articleViewModel.createArticle(
                         title=articleTitleTv.text.toString().takeIf { it.isNotBlank() },

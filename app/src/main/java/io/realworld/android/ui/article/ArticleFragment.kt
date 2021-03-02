@@ -15,6 +15,7 @@ import io.realworld.android.extensions.timeStamp
 
 class ArticleFragment: Fragment() {
 
+
     private lateinit var articleViewModel:ArticleViewModel
     private var _binding:FragmentArticleBinding? =null
     private var articleId:String? = null

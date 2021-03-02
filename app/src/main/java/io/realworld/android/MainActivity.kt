@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigator
 import io.realworld.android.databinding.ActivityMainBinding
+import io.realworld.android.ui.article.ArticleFragment
 import io.realworld.api.models.entities.User
 
 class MainActivity : AppCompatActivity() {
@@ -53,6 +56,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_feed, R.id.nav_my_feed, R.id.nav_auth
             ), drawerLayout
         )
+        navController.addOnDestinationChangedListener{_, destination, _ ->
+            when((destination as FragmentNavigator.Destination).className) {
+                ArticleFragment::class.qualifiedName -> {
+                    binding.appBarMain.fab.visibility = View.GONE
+                }
+                else -> {
+                    binding.appBarMain.fab.visibility =View.VISIBLE
+                }
+            }
+        }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 

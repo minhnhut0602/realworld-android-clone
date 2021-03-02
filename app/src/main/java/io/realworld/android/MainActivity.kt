@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigator
 import io.realworld.android.databinding.ActivityMainBinding
 import io.realworld.android.ui.article.ArticleFragment
+import io.realworld.android.ui.settings.SettingsFragment
 import io.realworld.api.models.entities.User
 
 class MainActivity : AppCompatActivity() {
@@ -58,7 +59,8 @@ class MainActivity : AppCompatActivity() {
         )
         navController.addOnDestinationChangedListener{_, destination, _ ->
             when((destination as FragmentNavigator.Destination).className) {
-                ArticleFragment::class.qualifiedName -> {
+                ArticleFragment::class.qualifiedName,
+                SettingsFragment::class.qualifiedName -> {
                     binding.appBarMain.fab.visibility = View.GONE
                 }
                 else -> {

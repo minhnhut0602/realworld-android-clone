@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val PREFS_FILE_AUTH= "prefs_auth"
         const val PREFS_TOKEN="token"
+        const val PREFS_USER="username"
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -93,6 +94,16 @@ class MainActivity : AppCompatActivity() {
             } ?: run {
                 sharedPreferences.edit {
                     remove(PREFS_TOKEN)
+                }
+            }
+
+            it?.username?.let { t->
+                sharedPreferences.edit {
+                    putString(PREFS_USER,t)
+                }
+            } ?: run {
+                sharedPreferences.edit {
+                    remove(PREFS_USER)
                 }
             }
             navController.navigateUp()

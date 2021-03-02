@@ -35,7 +35,14 @@ class ArticleViewModel:ViewModel() {
                 description = description,
                 body=body,
                 tagList = tagList
-        )
+        )?.let {
+            _article.postValue(it)
+        }
+
+    }
+
+    fun deleteArticle(slug:String) =viewModelScope.launch {
+        ArticleRepo.deleteArticle(slug)
     }
 
     fun getComment(slug:String) =viewModelScope.launch {

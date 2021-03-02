@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.realworld.android.R
 import io.realworld.android.databinding.FragmentArticleBinding
@@ -43,6 +44,11 @@ class ArticleFragment: Fragment() {
         _binding?.commentRecyclerView?.layoutManager= LinearLayoutManager(context)
         _binding?.commentRecyclerView?.adapter=commentAdapter
 
+        _binding?.apply {
+            editArticleBtn.visibility=View.GONE
+            deleteArticleBtn.visibility=View.GONE
+
+        }
         return _binding?.root
     }
 
@@ -56,6 +62,13 @@ class ArticleFragment: Fragment() {
                 authorTextView.text = it.author.username
                 dateTextView.timeStamp = it.createdAt
                 avatarImageView.loadImage(it.author.image, true)
+                if(userName==it.author.username){
+                    editArticleBtn.visibility=View.VISIBLE
+                    deleteArticleBtn.visibility=View.VISIBLE
+                }else{
+                    editArticleBtn.visibility=View.GONE
+                    deleteArticleBtn.visibility=View.GONE
+                }
             }
         }
 
@@ -67,12 +80,17 @@ class ArticleFragment: Fragment() {
             submitComment.setOnClickListener{
                articleId?.let { slug->
                    commentEditText.text.toString().takeIf { it.isNotBlank() }?.let { it1 ->
-                       articleViewModel.addComment(slug,
-                           it1
-                       )
+                       articleViewModel.addComment(slug, it1)
                    }
                }
                 commentEditText.setText("")
+            }
+
+            deleteArticleBtn.setOnClickListener{
+                articleId?.let { slug ->
+                    articleViewModel.deleteArticle(slug)
+                }
+                findNavController().navigate(R.id.nav_feed)
             }
         }
     }

@@ -57,11 +57,8 @@ object ArticleRepo {
         return response.body()?.article
     }
 
-    suspend fun deleteArticle(slug:String) :Article? {
-
-        val response=authApi.deleteArticle(slug)
-
-        return response.body()?.article
+    suspend fun deleteArticle(slug:String)  {
+        authApi.deleteArticle(slug)
     }
 
     suspend fun getComments(slug:String) :List<Comment>? {

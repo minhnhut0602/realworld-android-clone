@@ -13,7 +13,7 @@
         android:padding="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         tools:text="Title of the Article"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -24,9 +24,10 @@
             android:layout_height="32dp"
             tools:background="@color/conduit_grey"/>
         <LinearLayout
+            android:layout_toEndOf="@+id/avatarImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/authorTextView"
@@ -41,7 +42,31 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 tools:text="December 15, 2020"/>
         </LinearLayout>
-    </LinearLayout>
+
+        <Button
+            android:drawableLeft="@drawable/ic_add_small"
+            android:gravity="start|center"
+            android:id="@+id/editArticleBtn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="8sp"
+            android:text="Edit Article"
+            android:layout_width="100dp"
+            android:layout_height="50dp" />
+        <Button
+            android:drawableLeft="@drawable/ic_delete_small"
+            android:gravity="start|center"
+            android:id="@+id/deleteArticleBtn"
+            android:layout_below="@+id/editArticleBtn"
+            android:layout_alignParentEnd="true"
+            android:textSize="8sp"
+            android:text="Delete Article"
+            android:layout_width="100dp"
+            android:layout_height="50dp" />
+
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/bodyTextView"
         android:layout_width="match_parent"
@@ -51,7 +76,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error
 ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error
-"/>
+" />
+
     <View
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -68,7 +94,7 @@ ad deser Sunt error ad deser Sunt error ad deser Sunt error ad deser Sunt error 
             android:id="@+id/commentRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/article_item"
+            tools:listitem="@layout/comment_item"
             android:layout_above="@id/commentBox"/>
 
 

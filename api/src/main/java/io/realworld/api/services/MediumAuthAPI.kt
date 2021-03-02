@@ -52,7 +52,7 @@ interface MediumAuthAPI {
     @DELETE("articles/{slug}")
     suspend fun deleteArticle(
         @Path("slug") slug:String,
-    ) :Response<ArticleResponse>
+    )
 
     @POST("articles/{slug}/comments")
     suspend fun commentOnArticle(

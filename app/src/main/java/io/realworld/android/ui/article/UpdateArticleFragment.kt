@@ -51,7 +51,8 @@ class UpdateArticleFragment: Fragment() {
 
             articleTitleTv.requestFocus()
             submitButton.setOnClickListener{
-                articleViewModel.createArticle(
+                articleViewModel.updateArticle(
+                    articleSlug!!,
                     title=articleTitleTv.text.toString().takeIf { it.isNotBlank() },
                     description = articleDesciptionTv.text.toString().takeIf { it.isNotBlank() },
                     body = articleBodyTv.text.toString().takeIf{it.isNotBlank()},

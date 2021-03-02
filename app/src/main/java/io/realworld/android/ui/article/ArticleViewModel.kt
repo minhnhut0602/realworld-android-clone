@@ -46,9 +46,21 @@ class ArticleViewModel:ViewModel() {
     }
 
     fun updateArticle(
-
+        slug: String,
+        title:String?,
+        description:String?,
+        body:String?,
+        tagList:List<String>?=null
     ) =viewModelScope.launch {
-
+        ArticleRepo.updateArticle(
+            slug =slug,
+            title=title,
+            description = description,
+            body=body,
+            tagList = tagList
+        )?.let {
+            _article.postValue(it)
+        }
     }
     fun getComment(slug:String) =viewModelScope.launch {
         ArticleRepo.getComments(slug).let{

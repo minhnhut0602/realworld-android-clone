@@ -21,6 +21,7 @@ import androidx.navigation.fragment.FragmentNavigator
 import io.realworld.android.databinding.ActivityMainBinding
 import io.realworld.android.ui.article.ArticleFragment
 import io.realworld.android.ui.article.CreateArticleFragment
+import io.realworld.android.ui.article.UpdateArticleFragment
 import io.realworld.android.ui.settings.SettingsFragment
 import io.realworld.api.models.entities.User
 
@@ -62,11 +63,17 @@ class MainActivity : AppCompatActivity() {
             when((destination as FragmentNavigator.Destination).className) {
                 ArticleFragment::class.qualifiedName,
                 SettingsFragment::class.qualifiedName,
-                CreateArticleFragment::class.qualifiedName-> {
+                CreateArticleFragment::class.qualifiedName,
+                UpdateArticleFragment::class.qualifiedName-> {
                     binding.appBarMain.fab.visibility = View.GONE
                 }
                 else -> {
-                    binding.appBarMain.fab.visibility =View.VISIBLE
+                   sharedPreferences.getString(PREFS_TOKEN,null).let {
+                        if(it!=null)
+                            binding.appBarMain.fab.visibility =View.VISIBLE
+                        else
+                            binding.appBarMain.fab.visibility =View.GONE
+                    }
                 }
             }
         }
@@ -100,12 +107,12 @@ class MainActivity : AppCompatActivity() {
     private fun updateMenu(user: User?) {
         when(user){
             is User ->{
-                binding.appBarMain.fab.isVisible=true
+                binding.appBarMain.fab.visibility =View.VISIBLE
                 binding.navView.menu.clear()
                 binding.navView.inflateMenu(R.menu.menu_main_user)
             }
             else ->{
-                binding.appBarMain.fab.isVisible=false
+                binding.appBarMain.fab.visibility =View.GONE
                 binding.navView.menu.clear()
                 binding.navView.inflateMenu(R.menu.menu_main_guest)
             }

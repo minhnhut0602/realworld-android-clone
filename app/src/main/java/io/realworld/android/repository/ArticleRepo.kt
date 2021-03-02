@@ -51,8 +51,21 @@ object ArticleRepo {
         return response.body()?.article
     }
 
-    suspend fun updateArticle(slug:String,article:ArticleData) :Article? {
-        val response =authApi.updateArticle(slug, UpsertArticleRequest(article))
+    suspend fun updateArticle(
+        slug:String,
+        title:String?,
+        description:String?,
+        body:String?,
+        tagList:List<String>?=null
+        ) :Article? {
+        val response =authApi.updateArticle(slug, UpsertArticleRequest(
+            ArticleData(
+                title=title,
+                description = description,
+                body = body,
+                tagList = tagList
+            )
+        ))
 
         return response.body()?.article
     }

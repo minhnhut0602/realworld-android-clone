@@ -40,7 +40,8 @@
     <fragment
         android:id="@+id/nav_article"
         android:name="io.realworld.android.ui.article.ArticleFragment"
-        tools:layout="@layout/fragment_article">
+        tools:layout="@layout/fragment_article"
+        android:label="@string/read_article">
         <action
             android:id="@+id/action_openUpdateArticle"
             app:destination="@id/nav_update_article"
@@ -51,7 +52,8 @@
     <fragment
         android:id="@+id/nav_create_article"
         android:name="io.realworld.android.ui.article.CreateArticleFragment"
-        tools:layout="@layout/fragment_create_article">
+        tools:layout="@layout/fragment_create_article"
+        android:label="@string/create_article_string">
         <action
             android:id="@+id/action_openArticle"
             app:destination="@id/nav_article"
@@ -62,7 +64,8 @@
     <fragment
         android:id="@+id/nav_update_article"
         android:name="io.realworld.android.ui.article.UpdateArticleFragment"
-        tools:layout="@layout/fragment_create_article">
+        tools:layout="@layout/fragment_create_article"
+        android:label="@string/update_article_string">
         <action
             android:id="@+id/action_open_updated_Article"
             app:destination="@id/nav_article"

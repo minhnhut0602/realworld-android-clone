@@ -11,5 +11,8 @@
     <string name="menu_auth">Login / Signup</string>
     <string name="menu_settings">Settings</string>
     <string name="arg_article_id">ARTICLE_ID</string>
+    <string name="read_article">Read Article</string>
+    <string name="create_article_string">Create Article</string>
+    <string name="update_article_string">Update Article</string>
 
 </resources>

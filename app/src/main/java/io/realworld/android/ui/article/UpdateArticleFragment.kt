@@ -69,7 +69,7 @@ class UpdateArticleFragment: Fragment() {
                        articleTitleTv.setText(it.title)
                         articleDesciptionTv.setText(it.description)
                         articleBodyTv.setText(it.body)
-                        articleTagTv.setText(it.tagList.toString())
+                        articleTagTv.setText(it.tagList.toString().removePrefix("[").removeSuffix("]").replace(",",""))
             }
         }
 

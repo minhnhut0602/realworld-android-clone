@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,8 +14,6 @@ import androidx.navigation.fragment.findNavController
 import io.realworld.android.MainActivity
 import io.realworld.android.R
 import io.realworld.android.databinding.FragmentCreateArticleBinding
-import io.realworld.android.extensions.loadImage
-import io.realworld.android.extensions.timeStamp
 
 class UpdateArticleFragment: Fragment() {
 
@@ -75,8 +72,6 @@ class UpdateArticleFragment: Fragment() {
                             .replace(",",""))
             }
         }
-
-
     }
 
     private fun openUpdatedArticle() {

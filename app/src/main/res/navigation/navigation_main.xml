@@ -34,7 +34,7 @@
         tools:layout="@layout/fragment_auth"/>
     <fragment
         android:id="@+id/nav_settings"
-        android:name="io.realworld.android.ui.settings.SettingsFragment"
+        android:name="io.realworld.android.ui.profile.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_feed"/>
     <fragment
@@ -47,6 +47,14 @@
             app:destination="@id/nav_update_article"
             app:popUpTo="@id/nav_article">
             <argument android:name="@string/arg_article_id" app:argType="string"/>
+        </action>
+        <action
+            android:id="@+id/action_openProfile"
+            app:destination="@id/nav_profile"
+            app:popUpTo="@id/nav_article">
+            <argument
+                android:name="username"
+                app:argType="string"/>
         </action>
     </fragment>
     <fragment
@@ -73,5 +81,20 @@
             <argument android:name="@string/arg_article_id" app:argType="string"/>
         </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="io.realworld.android.ui.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile"
+        android:label="@string/user_profile_string">
+        <action
+            android:id="@+id/action_open_user_article"
+            app:destination="@id/nav_article"
+            app:popUpTo="@id/nav_profile">
+            <argument android:name="@string/arg_article_id" app:argType="string"/>
+        </action>
+
+    </fragment>
+
 
 </navigation>

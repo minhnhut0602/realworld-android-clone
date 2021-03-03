@@ -118,6 +118,16 @@ class ArticleFragment: Fragment() {
                     )
                 }
             }
+            authorTextView.let{ tv->
+                tv.setOnClickListener {
+                    findNavController().navigate(
+                        R.id.action_openProfile,
+                        bundleOf(
+                            "username" to tv.text
+                        )
+                    )
+                }
+            }
         }
     }
 

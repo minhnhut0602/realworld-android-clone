@@ -15,14 +15,14 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigator
 import io.realworld.android.databinding.ActivityMainBinding
 import io.realworld.android.ui.article.ArticleFragment
 import io.realworld.android.ui.article.CreateArticleFragment
 import io.realworld.android.ui.article.UpdateArticleFragment
-import io.realworld.android.ui.settings.SettingsFragment
+import io.realworld.android.ui.profile.ProfileFragment
+import io.realworld.android.ui.profile.SettingsFragment
 import io.realworld.api.models.entities.User
 
 class MainActivity : AppCompatActivity() {
@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity() {
                 ArticleFragment::class.qualifiedName,
                 SettingsFragment::class.qualifiedName,
                 CreateArticleFragment::class.qualifiedName,
-                UpdateArticleFragment::class.qualifiedName-> {
+                UpdateArticleFragment::class.qualifiedName,
+                ProfileFragment::class.qualifiedName-> {
                     binding.appBarMain.fab.visibility = View.GONE
                 }
                 else -> {

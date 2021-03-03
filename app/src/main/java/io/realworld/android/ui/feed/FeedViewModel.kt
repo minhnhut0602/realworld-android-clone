@@ -24,5 +24,16 @@ class FeedViewModel : ViewModel() {
         }
     }
 
+    fun getUserFeed(username:String?) =viewModelScope.launch {
+        ArticleRepo.getArticles(author = username)?.let {
+            _feedData.postValue(it)
+        }
+    }
+
+    fun getUserFavoriteFeed(username:String?) =viewModelScope.launch {
+        ArticleRepo.getArticles(favorite = username )?.let {
+            _feedData.postValue(it)
+        }
+    }
 
 }

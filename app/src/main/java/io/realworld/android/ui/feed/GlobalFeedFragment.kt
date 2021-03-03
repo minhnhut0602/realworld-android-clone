@@ -26,8 +26,10 @@ class GlobalFeedFragment : Fragment() {
         _binding= FragmentFeedBinding.inflate(layoutInflater,container,false)
 
         feedAdapter= FeedAdapter(requireContext()) { openArticle(it) }
-        _binding?.feedRecyclerView?.layoutManager= LinearLayoutManager(context)
-        _binding?.feedRecyclerView?.adapter=feedAdapter
+        _binding?.feedRecyclerView?.apply {
+            layoutManager=LinearLayoutManager(context)
+            adapter=feedAdapter
+        }
         return _binding?.root
     }
 

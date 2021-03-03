@@ -18,10 +18,8 @@ class GlobalFeedFragment : Fragment() {
 
     private var _binding :FragmentFeedBinding? = null
     private lateinit var feedAdapter: FeedAdapter
+    private val viewModel:FeedViewModel by activityViewModels()
 
-    val viewModel:FeedViewModel by activityViewModels()
-    val authViewModel:AuthViewModel by activityViewModels()
-    private var username:String?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,11 +40,6 @@ class GlobalFeedFragment : Fragment() {
         viewModel.feedData.observe({lifecycle}){
             feedAdapter.updateArticle(it)
         }
-        authViewModel.user.observe({lifecycle}) { user->
-            user?.let{
-                username=it.username
-            }
-        }
     }
 
     fun openArticle(articleId:String){
@@ -54,8 +47,7 @@ class GlobalFeedFragment : Fragment() {
         findNavController().navigate(
             R.id.action_globalFeed_openArticle,
             bundleOf(
-                resources.getString(R.string.arg_article_id) to articleId,
-                "username" to username
+                resources.getString(R.string.arg_article_id) to articleId
             )
         )
     }

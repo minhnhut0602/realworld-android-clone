@@ -1,6 +1,9 @@
 package io.realworld.android.ui.article
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,11 +21,16 @@ import io.realworld.android.extensions.timeStamp
 class ArticleFragment: Fragment() {
 
 
+    companion object {
+        const val PREFS_FILE_AUTH= "prefs_auth"
+        const val PREFS_USER="username"
+    }
     private lateinit var articleViewModel:ArticleViewModel
     private var _binding:FragmentArticleBinding? =null
     private var articleId:String? = null
     private lateinit var commentAdapter: CommentAdapter
     private var userName:String?=null
+    private var sharedPreferences: SharedPreferences?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,13 +38,21 @@ class ArticleFragment: Fragment() {
     ): View? {
         _binding= FragmentArticleBinding.inflate(layoutInflater,container,false)
         articleViewModel=ViewModelProvider(this).get(ArticleViewModel::class.java)
+
+        sharedPreferences = this.activity?.getSharedPreferences(PREFS_FILE_AUTH, Context.MODE_PRIVATE)
+
+
         arguments?.let{
             articleId=it.getString(resources.getString(R.string.arg_article_id))
-            userName=it.getString("username")
         }
+
         articleId?.let{
             articleViewModel.getArticle(it)
         articleViewModel.getComment(it)
+        }
+
+        sharedPreferences?.getString(PREFS_USER,null)?.let{
+            userName=it
         }
 
         commentAdapter=CommentAdapter(userName) { deleteClickedComment(it) }

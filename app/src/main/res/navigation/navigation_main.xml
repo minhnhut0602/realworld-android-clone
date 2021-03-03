@@ -51,7 +51,7 @@
         <action
             android:id="@+id/action_openProfile"
             app:destination="@id/nav_profile"
-            app:popUpTo="@id/nav_article">
+            app:popUpTo="@id/nav_feed">
             <argument
                 android:name="username"
                 app:argType="string"/>
@@ -86,6 +86,7 @@
         android:id="@+id/nav_profile"
         android:name="io.realworld.android.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile"
+
         android:label="@string/user_profile_string">
         <action
             android:id="@+id/action_open_user_article"

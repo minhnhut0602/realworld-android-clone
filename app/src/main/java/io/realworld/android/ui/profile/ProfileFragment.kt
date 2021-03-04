@@ -30,6 +30,7 @@ class ProfileFragment : Fragment() {
     private val profileViewModel: ProfileViewModel by activityViewModels()
     private lateinit var feedAdapter : FeedAdapter
     private var sharedPreferences : SharedPreferences? =null
+    private var myFeedSelected:Boolean =true
     private var userName:String? = null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +40,7 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(layoutInflater,container,false)
 
         sharedPreferences= this.activity?.getSharedPreferences(PREFS_FILE_AUTH, Context.MODE_PRIVATE)
-        feedAdapter= FeedAdapter(requireContext()) {openArticle(it)}
+        feedAdapter= FeedAdapter({openArticle(it)} ,{slug,isFavorited-> favoriteArticle(slug,isFavorited)})
         _binding?.userFeedRecyclerView?.apply {
             layoutManager = LinearLayoutManager(context)
             adapter=feedAdapter
@@ -72,9 +73,11 @@ class ProfileFragment : Fragment() {
                     when(tab?.position){
                         0 -> {
                             feedViewModel.getUserFeed(userName)
+                            myFeedSelected=true
                         }
                         1-> {
                             feedViewModel.getUserFavoriteFeed(userName)
+                            myFeedSelected=false
                         }
                     }
                 }
@@ -87,7 +90,6 @@ class ProfileFragment : Fragment() {
 
                 }
             })
-
         }
 
     }
@@ -99,6 +101,16 @@ class ProfileFragment : Fragment() {
                 resources.getString(R.string.arg_article_id) to articleId
             )
         )
+    }
+
+    private fun favoriteArticle(slug:String,isFavorited:Boolean){
+        feedViewModel.markFeedAsFavoriteUnFavorite(slug,isFavorited)
+        myFeedSelected.let {
+            if(it)
+                feedViewModel.getUserFeed(userName)
+            else
+                feedViewModel.getUserFavoriteFeed(userName)
+        }
     }
 
     override fun onDestroyView() {

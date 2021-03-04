@@ -54,4 +54,13 @@
         app:layout_constraintStart_toEndOf="@+id/avatarImageView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="author"/>
+
+    <ImageView
+        android:id="@+id/favoriteImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bodySnippetTextView"
+        android:src="@drawable/ic_favorite" />
 </androidx.constraintlayout.widget.ConstraintLayout>

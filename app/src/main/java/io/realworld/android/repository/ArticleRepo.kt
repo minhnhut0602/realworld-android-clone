@@ -12,9 +12,21 @@ object ArticleRepo {
     private  val api=MediumClient.mediumAPI
     private val authApi=MediumClient.mediumAuthAPI
 
+    suspend fun getArticle(author:String?=null,tag:String?=null,favorite:String?=null) :List<Article>? {
+        return if(MediumClient.token!=null){
+            getAuthArticles(author,tag,favorite)
+        } else{
+            getGuestArticles(author,tag,favorite)
+        }
+    }
 
-    suspend fun getArticles(author:String?=null,tag:String?=null,favorite:String?=null) : List<Article>? {
+    suspend fun getGuestArticles(author:String?=null,tag:String?=null,favorite:String?=null) : List<Article>? {
         val response= api.getArticles(author,tag,favorite)
+        return response.body()?.articles
+    }
+
+    suspend fun getAuthArticles(author:String?=null,tag:String?=null,favorite:String?=null) : List<Article>? {
+        val response= authApi.getArticles(author,tag,favorite)
         return response.body()?.articles
     }
 
@@ -28,6 +40,11 @@ object ArticleRepo {
 
         return response.body()?.article
     }
+
+//    suspend fun getAuthArticleBySlug(slug:String) :Article?{
+//        val response=authApi.getArticlesBySlug(slug)
+//        return response.body()?.article
+//    }
     suspend fun getTags() :List<String>? {
         val response=api.getTags()
         return response.body()?.tags
@@ -66,7 +83,6 @@ object ArticleRepo {
                 tagList = tagList
             )
         ))
-
         return response.body()?.article
     }
 

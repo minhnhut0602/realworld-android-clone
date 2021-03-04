@@ -14,7 +14,7 @@ class FeedViewModel : ViewModel() {
     val feedData:LiveData<List<Article>> = _feedData
 
     fun getGlobalFeed()=viewModelScope.launch {
-        ArticleRepo.getArticles()?.let {
+        ArticleRepo.getArticle()?.let {
             _feedData.postValue(it)
         }
     }
@@ -25,15 +25,30 @@ class FeedViewModel : ViewModel() {
     }
 
     fun getUserFeed(username:String?) =viewModelScope.launch {
-        ArticleRepo.getArticles(author = username)?.let {
+        ArticleRepo.getArticle(author = username)?.let {
             _feedData.postValue(it)
         }
     }
 
     fun getUserFavoriteFeed(username:String?) =viewModelScope.launch {
-        ArticleRepo.getArticles(favorite = username )?.let {
+        ArticleRepo.getArticle(favorite = username )?.let {
             _feedData.postValue(it)
         }
     }
 
+    fun favoriteArticle(slug:String,username: String?=null) =viewModelScope.launch {
+        ArticleRepo.addFavorite(slug)
+    }
+
+    fun unFavoriteArticle(slug:String,username:String? =null) =viewModelScope.launch {
+        ArticleRepo.removeFavorite(slug)
+    }
+
+    fun markFeedAsFavoriteUnFavorite(slug:String,isFavorite:Boolean){
+        if(isFavorite){
+            unFavoriteArticle(slug)
+        }else{
+            favoriteArticle(slug)
+        }
+    }
 }

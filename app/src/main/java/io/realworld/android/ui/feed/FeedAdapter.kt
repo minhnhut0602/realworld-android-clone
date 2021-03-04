@@ -13,11 +13,11 @@ import io.realworld.android.extensions.loadImage
 import io.realworld.android.extensions.timeStamp
 import io.realworld.api.models.entities.Article
 
-class FeedAdapter(private val context: Context,val onArticleClicked: (slug:String)->Unit):RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+class FeedAdapter(val onArticleClicked: (slug:String)->Unit, val onFavoriteClicked: (slug:String,isFavorited:Boolean)->Unit):RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
     private val allArticle =ArrayList<Article>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewHolder =ViewHolder(LayoutInflater.from(context).inflate(
+        val viewHolder =ViewHolder(LayoutInflater.from(parent.context).inflate(
             R.layout.article_item,parent, false
         ))
         return viewHolder
@@ -26,14 +26,24 @@ class FeedAdapter(private val context: Context,val onArticleClicked: (slug:Strin
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val article=allArticle[position]
-        holder.author.text=article.author.username
-        holder.dateTv.timeStamp=article.updatedAt
-        holder.title.text=article.title
-        holder.bodySnippet.text=article.body
-        article.author.image.let{
-            holder.profileImage.loadImage(it)
+        holder.apply {
+            author.text=article.author.username
+            dateTv.timeStamp=article.updatedAt
+            title.text=article.title
+            bodySnippet.text=article.body
+            article.author.image.let{
+                profileImage.loadImage(it)
+            }
+            if(article.favorited){
+                favoriteIv.setImageResource(R.drawable.ic_unfavorite)
+            }else{
+                favoriteIv.setImageResource(R.drawable.ic_favorite)
+            }
+            itemView.setOnClickListener { onArticleClicked(article.slug) }
+
+            favoriteIv.setOnClickListener {
+                onFavoriteClicked(article.slug,article.favorited) }
         }
-        holder.itemView.setOnClickListener { onArticleClicked(article.slug) }
     }
 
     override fun getItemCount(): Int = allArticle.size
@@ -45,12 +55,12 @@ class FeedAdapter(private val context: Context,val onArticleClicked: (slug:Strin
         val dateTv=itemView.findViewById<TextView>(R.id.dateTextView)
         val title=itemView.findViewById<TextView>(R.id.titleTextView)
         val bodySnippet=itemView.findViewById<TextView>(R.id.bodySnippetTextView)
-
+        val favoriteIv=itemView.findViewById<ImageView>(R.id.favoriteImageView)
     }
 
-    fun updateArticle(article:List<Article>){
+    fun updateArticle(feed:List<Article>){
         allArticle.clear()
-        allArticle.addAll(article)
+        allArticle.addAll(feed)
         notifyDataSetChanged()
     }
 }

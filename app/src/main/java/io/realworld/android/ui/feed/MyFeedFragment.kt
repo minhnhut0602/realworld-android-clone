@@ -23,7 +23,7 @@ class MyFeedFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding= FragmentFeedBinding.inflate(layoutInflater,container,false)
-        feedAdapter= FeedAdapter(requireContext()) { openArticle(it) }
+        feedAdapter= FeedAdapter({ openArticle(it) } ,{slug, isFavorited ->  favoriteArticle(slug, isFavorited)})
         _binding?.feedRecyclerView?.apply{
             layoutManager=LinearLayoutManager(context)
             adapter=feedAdapter
@@ -51,6 +51,10 @@ class MyFeedFragment: Fragment() {
         )
     }
 
+    private fun favoriteArticle(slug:String,isFavorited:Boolean){
+        viewModel.markFeedAsFavoriteUnFavorite(slug,isFavorited)
+        viewModel.getMyFeed()
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

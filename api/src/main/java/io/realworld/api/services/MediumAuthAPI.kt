@@ -34,6 +34,13 @@ interface MediumAuthAPI {
         @Path("username") username:String
     ) :Response<ProfileResponse>
 
+    @GET("articles")
+    suspend fun getArticles(
+        @Query("author") author :String?=null,
+        @Query("tag") tag :String?=null,
+        @Query("favorited") favorited :String?=null
+    ) :Response<ArticlesResponse>
+
     @POST("articles")
     suspend fun createArticle(
         @Body article: UpsertArticleRequest
@@ -81,4 +88,9 @@ interface MediumAuthAPI {
     suspend fun removeFavorite(
         @Path("slug") slug: String,
     ) :Response<ArticleResponse>
+
+    @GET("articles/{slug}")
+    suspend fun getArticlesBySlug(
+        @Path("slug") slug:String
+    ): Response<ArticleResponse>
 }

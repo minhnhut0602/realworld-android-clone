@@ -34,15 +34,27 @@ class FeedAdapter(val onArticleClicked: (slug:String)->Unit, val onFavoriteClick
             article.author.image.let{
                 profileImage.loadImage(it)
             }
+//            favoriteIv.isClickable=true
             if(article.favorited){
                 favoriteIv.setImageResource(R.drawable.ic_unfavorite)
+                favoriteIv.tag = "1"
             }else{
                 favoriteIv.setImageResource(R.drawable.ic_favorite)
+                favoriteIv.tag= "0"
             }
             itemView.setOnClickListener { onArticleClicked(article.slug) }
 
             favoriteIv.setOnClickListener {
-                onFavoriteClicked(article.slug,article.favorited) }
+//                favoriteIv.isClickable=false
+//                if(it.tag=="0"){
+//                    favoriteIv.setImageResource(R.drawable.ic_unfavorite)
+//                    favoriteIv.tag="1"
+//                }else{
+//                    favoriteIv.setImageResource(R.drawable.ic_favorite)
+//                    favoriteIv.tag="0"
+//                }
+                onFavoriteClicked(article.slug,article.favorited)
+            }
         }
     }
 

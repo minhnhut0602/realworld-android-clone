@@ -62,5 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bodySnippetTextView"
-        android:src="@drawable/ic_favorite" />
+        android:src="@drawable/ic_favorite"
+        android:tag="0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

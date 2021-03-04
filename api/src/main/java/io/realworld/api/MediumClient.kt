@@ -23,8 +23,8 @@ object MediumClient {
     }
 
     val okHttpBuilder= OkHttpClient.Builder()
-        .readTimeout(10,TimeUnit.SECONDS)
-        .connectTimeout(10,TimeUnit.SECONDS)
+        .readTimeout(5,TimeUnit.SECONDS)
+        .connectTimeout(5,TimeUnit.SECONDS)
     val retrofit= Retrofit.Builder().
             baseUrl("https://conduit.productionready.io/api/")
             .addConverterFactory(MoshiConverterFactory.create())

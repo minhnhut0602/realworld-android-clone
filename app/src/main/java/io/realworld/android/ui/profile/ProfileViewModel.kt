@@ -19,4 +19,17 @@ class ProfileViewModel:ViewModel() {
             _profile.postValue(it)
         }
     }
+    fun followUnfollowProfile(username: String,isFollowed:String?) {
+        if(isFollowed=="follow")
+            followUser(username)
+        else
+            unfollowUser(username)
+    }
+
+    fun followUser(username:String) = viewModelScope.launch {
+        UserRepo.followUser(username)
+    }
+    fun unfollowUser(username:String) =viewModelScope.launch {
+        UserRepo.unfollowUser(username)
+    }
 }

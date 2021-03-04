@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/ic_add"
+        android:drawable="@drawable/ic_create"
         android:height="15dp"
         android:width="15dp"/>
 </layer-list>

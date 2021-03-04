@@ -17,6 +17,7 @@ import io.realworld.android.databinding.FragmentProfileBinding
 import io.realworld.android.extensions.loadImage
 import io.realworld.android.ui.feed.FeedAdapter
 import io.realworld.android.ui.feed.FeedViewModel
+import java.util.*
 
 class ProfileFragment : Fragment() {
 
@@ -46,9 +47,17 @@ class ProfileFragment : Fragment() {
             adapter=feedAdapter
         }
 
-        userName = arguments?.getString(PREFS_USER)
-            ?: sharedPreferences?.getString(PREFS_USER,null)
-
+//        userName = arguments?.getString(PREFS_USER)
+//            ?: sharedPreferences?.getString(PREFS_USER,null);
+        arguments?.getString(PREFS_USER).let {
+            if(it!=null){
+                userName=it
+                _binding?.followUserBtn?.visibility=View.VISIBLE
+            }else{
+                userName=sharedPreferences?.getString(PREFS_USER,null)
+                _binding?.followUserBtn?.visibility=View.GONE
+            }
+        }
         userName?.let {
             profileViewModel.getUserProfile(it)
             feedViewModel.getUserFeed(it)
@@ -63,10 +72,33 @@ class ProfileFragment : Fragment() {
             feedAdapter.updateArticle(it)
         }
         _binding?.apply {
-            profileViewModel.profile.observe({lifecycle}) {
-                 profileUsername.text=it.username
+            profileViewModel.profile.observe({lifecycle}) { it ->
+                profileUsername.text=it.username
                 profileIv.loadImage(it.image,true)
                 profileBioTv.text=it.bio
+                it.following.let {
+                    if(it) {
+                        followUserBtn.text = "Unfollow"
+                        followUserBtn.setCompoundDrawablesWithIntrinsicBounds(
+                            R.drawable.ic_remove,0,0,0)
+                    }
+                    else{
+                        followUserBtn.text="Follow"
+                        followUserBtn.setCompoundDrawablesWithIntrinsicBounds(
+                            R.drawable.ic_add,0,0,0)
+                    }
+                }
+
+                followUserBtn.let{button->
+                    button.setOnClickListener {
+                        userName?.let {username->
+                            profileViewModel.followUnfollowProfile(username,button.text.toString()
+                                .toLowerCase(Locale.getDefault()))
+                            profileViewModel.getUserProfile(username)
+                        }
+                    }
+                }
+
             }
             feedTabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {

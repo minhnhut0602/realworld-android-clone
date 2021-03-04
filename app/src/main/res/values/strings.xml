@@ -15,5 +15,6 @@
     <string name="create_article_string">Create Article</string>
     <string name="update_article_string">Update Article</string>
     <string name="user_profile_string">Profile</string>
+    <string name="follow_string">Follow</string>
 
 </resources>

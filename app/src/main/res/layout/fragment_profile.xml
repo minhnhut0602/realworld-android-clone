@@ -38,6 +38,13 @@
             android:layout_below="@+id/profileUsername"
             android:layout_toEndOf="@+id/profileIv"
             tools:text="bio"/>
+        <Button
+            android:id="@+id/followUserBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/follow_string"
+            android:drawableLeft="@drawable/ic_add"/>
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout

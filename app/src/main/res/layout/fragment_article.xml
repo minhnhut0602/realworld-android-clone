@@ -44,7 +44,7 @@
         </LinearLayout>
 
         <Button
-            android:drawableLeft="@drawable/ic_add_small"
+            android:drawableLeft="@drawable/ic_create_small"
             android:gravity="start|center"
             android:id="@+id/editArticleBtn"
             android:layout_alignParentTop="true"

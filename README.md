@@ -44,7 +44,7 @@ The project contains an example e2e test to illustrate an end-to-end test case.
 ## License & Credits
 Credits have to go out to [Thinkster](https://thinkster.io/) with their awesome [RealWorld](https://github.com/gothinkster/realworld) 
 
-and [Arnav Gupta](https://github.com/championswimmer") Project.
+and [Arnav Gupta's](https://github.com/championswimmer) Project.
 
 This project is licensed under the MIT license.
 

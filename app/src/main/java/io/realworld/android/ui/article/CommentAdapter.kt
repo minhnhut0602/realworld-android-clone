@@ -29,7 +29,7 @@ class CommentAdapter(val username:String?, val onCommentDeleteClicked: (id:Int) 
             profileImage.loadImage(comment.author.image,true)
             userTv.text=comment.author.username
 
-                if(comment.author.username==username && username!=null) {
+                if(comment.author.username==username) {
                     deleteIv.isVisible=true
                     deleteIv.setOnClickListener {
                         onCommentDeleteClicked(comment.id)
